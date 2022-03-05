@@ -1,0 +1,76 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "Computer",
+      "price": "4305",
+      "quantity": "1001",
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": "Printer",
+      "price": 300,
+      "quantity": 600,
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "smart",
+      "price": 1200,
+      "quantity": 210,
+      "selected": true,
+      "available": false
+    },
+    {
+      "id": 4,
+      "name": "smart-card",
+      "price": 1200,
+      "quantity": 210,
+      "selected": false,
+      "available": false
+    },
+    {
+      "id": 5,
+      "name": "smart-Tv",
+      "price": 12000,
+      "quantity": 21,
+      "selected": true,
+      "available": true
+    },
+    {
+      "id": 6,
+      "name": "Tv",
+      "price": 1000,
+      "quantity": 31,
+      "selected": true,
+      "available": true
+    },
+    {
+      "id": 7,
+      "name": "radio",
+      "price": 100,
+      "quantity": 31,
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 8,
+      "name": "A4-47",
+      "price": "1500",
+      "quantity": "25",
+      "selected": true,
+      "available": false
+    },
+    {
+      "name": "modem",
+      "price": "45000",
+      "quantity": "15",
+      "selected": true,
+      "available": true,
+      "id": 9
+    }
+  ]
+}
