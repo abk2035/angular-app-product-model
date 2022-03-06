@@ -18,29 +18,12 @@ export class ProductsListComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  onSelect(p:Product){
-	this.productEventEmitter.emit(
-		{type:ProductActionsTypes.SELECT_PRODUCT,
-		 payload:p
-		})
-}
-  onDelete(p:Product){
-	this.productEventEmitter.emit(
-		{type:ProductActionsTypes.DELETE_PRODUCT,
-		payload:p
-		})
-}
 
- onEdit(p:Product){
-	this.productEventEmitter.emit(
-		{type:ProductActionsTypes.EDIT_PRODUCT,
-		 payload:p
-		})
 	
-}
+
 
 onAction($event:ActionEvent){
-	
+	this.productEventEmitter.emit($event);
 }
 
 }
