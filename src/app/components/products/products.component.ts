@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { catchError, map, of,  startWith } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { Product } from 'src/app/model/product.model';
+import { ProductsState, ProductStateEnum } from 'src/app/ngRX/product.reduxer';
 import { ProductsService } from 'src/app/services/products.service';
 import { ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes } from 'src/app/states/products.state';
 
@@ -13,15 +15,21 @@ import { ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes } from 's
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  products$:Observable<AppDataState<Product[]>>|null=null;
-  readonly DataStateEnum=DataStateEnum;
   
-  constructor(private productsService:ProductsService , private router:Router) { }
+  //products$:Observable<AppDataState<Product[]>>|null=null;
+  readonly DataStateEnum = ProductStateEnum;
+  productsState$ : Observable<ProductsState> | null = null;
+  
+  constructor(private store:Store<any>) { }
+  
 
   ngOnInit(): void {
+	this.productsState$ =this.store.pipe(
+		                   map((state)=>state.catalogState)
+	                      )
   }
   
-  onGetAllProducts(){
+ /* onGetAllProducts(){
 	    console.log('debut de GetAllProduct');
 	this.products$=
 	               this.productsService.getAllProducts()
@@ -122,7 +130,7 @@ onActionEvent($event:ActionEvent){
 		break;
 		
 	}
-}
+}*/
 
 }
 

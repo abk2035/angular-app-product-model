@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { GetAllProductsAction, GetSelectedProductsAction } from 'src/app/ngRX/product.action';
 import { ActionEvent, ProductActionsTypes } from 'src/app/states/products.state';
 
 @Component({
@@ -9,18 +11,17 @@ import { ActionEvent, ProductActionsTypes } from 'src/app/states/products.state'
 export class ProductsNavBarComponent implements OnInit {
  
  @Output() productEventEmitter : EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>() ;
-  constructor() { }
+  constructor(private store :Store<any> ) { }
 
   ngOnInit(): void {
   }
   
   onGetAllProducts(){
-	this.productEventEmitter.emit({type:ProductActionsTypes.GET_ALL_PRODUCTS});
+	this.store.dispatch(new GetAllProductsAction({}))
 }
   
   onGetSelectedProducts(){
-	this.productEventEmitter.emit({type:ProductActionsTypes.GET_SELECTED_PRODUCTS});
-	
+   this.store.dispatch(new GetSelectedProductsAction({}))	
 }
   
   onGetAvailableProducts(){

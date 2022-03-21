@@ -29,7 +29,7 @@
       "name": "smart-card",
       "price": 1200,
       "quantity": 210,
-      "selected": false,
+      "selected": true,
       "available": false
     },
     {

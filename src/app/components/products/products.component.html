@@ -25,16 +25,19 @@
     </ul>
 </nav>-->
 <!--- division de l'app en sous composant-->
-<app-products-nav-bar (productEventEmitter)="onActionEvent($event)"></app-products-nav-bar>
-<!--<div class="container mt-4">
-	  <ng-container *ngIf="products$ |async as result" [ngSwitch]="result.dataState">
+<app-products-nav-bar ></app-products-nav-bar>
+<div class="container mt-4">
+	  <ng-container *ngIf="productsState$ |async as state" [ngSwitch]="state.dataState">
 		  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
-		    LOADING...
+		     <div class="p-2"> LOADING... </div>
+		  </ng-container>
+		   <ng-container *ngSwitchCase="DataStateEnum.INITIAL">
+		      <div class="p-2"> INITIAL STATE...</div>
 		  </ng-container>	
-		  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+		  <ng-container *ngSwitchCase="DataStateEnum.LOADER">
 			      <table class="table">
 				     <tr><th>ID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Selected</th><th>Available</th></tr>
-				     <tr *ngFor="let p of result.data">
+				     <tr *ngFor="let p of state.products">
 				       <td>{{p.id}}</td>
 				       <td>{{p.name}}</td>
 				       <td>{{p.price}}</td>
@@ -42,18 +45,18 @@
 				       <td>{{p.selected}}</td>
 				       <td>{{p.available}}</td>
 				       <td>
-				         <button (click)="onSelect(p)" [ngClass]="p.selected? 'btn btn-success':'btn btn-danger'">
+				         <button [ngClass]="p.selected? 'btn btn-success':'btn btn-danger'">
 				           <span *ngIf="p.selected">Unselect</span>
 				           <span *ngIf="!p.selected">Select</span>
 				         </button>
 				       </td>
 				       <td>
-				         <button (click)="onDelete(p)" class="btn btn-danger">
+				         <button  class="btn btn-danger">
 				           <span class="fa fa-trash-o"></span>
 				         </button>
 				       </td>
 				       <td>
-				         <button (click)="onEdit(p)" class="btn btn-danger">
+				         <button  class="btn btn-danger">
 				           <span class="fa fa-edit"></span>
 				         </button>
 				       </td>
@@ -62,15 +65,17 @@
 		  </ng-container>
 		  <ng-container *ngSwitchCase="DataStateEnum.ERROR">
 		    <div class="alert-danger">
-		       {{result.errorMessage}}
+		       <div class="p-2">{{state.errorMessage}}</div>
 		    </div>
 		  </ng-container></ng-container>
-</div>-->
+</div>
 
 <!-- ajout de product list -->
+<!--
 <app-products-list [productsInput$]="products$" 
     (productEventEmitter)="onActionEvent($event)">
 </app-products-list>
+-->
 
 
 
