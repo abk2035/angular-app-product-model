@@ -26,6 +26,7 @@
 </nav>-->
 <!--- division de l'app en sous composant-->
 <app-products-nav-bar ></app-products-nav-bar>
+<!--
 <div class="container mt-4">
 	  <ng-container *ngIf="productsState$ |async as state" [ngSwitch]="state.dataState">
 		  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
@@ -67,15 +68,14 @@
 		    <div class="alert-danger">
 		       <div class="p-2">{{state.errorMessage}}</div>
 		    </div>
-		  </ng-container></ng-container>
-</div>
+		  </ng-container> </ng-container>
+</div>-->
 
 <!-- ajout de product list -->
-<!--
-<app-products-list [productsInput$]="products$" 
-    (productEventEmitter)="onActionEvent($event)">
+
+<app-products-list [productsInput$]="productsState$" >
 </app-products-list>
--->
+
 
 
 

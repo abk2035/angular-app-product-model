@@ -36,8 +36,8 @@ constructor (private http: HttpClient){
      select(product:Product): Observable<Product>{
 	
 	let host=environment.host;
-	product.selected=!product.selected;
-	return this.http.put <Product>(host+"/product/"+product.id,product);
+	//{...product,product.selected=!product.selected};
+	return this.http.put <Product>(host+"/product/"+product.id,{...product,selected:!product.selected});
 }
 
 // delete service

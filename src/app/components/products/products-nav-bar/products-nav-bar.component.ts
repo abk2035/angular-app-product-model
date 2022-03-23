@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetAllProductsAction, GetSelectedProductsAction } from 'src/app/ngRX/product.action';
+import { GetAllProductsAction, GetSelectedProductsAction, NewProductsAction, SearchProductsAction } from 'src/app/ngRX/product.action';
 import { ActionEvent, ProductActionsTypes } from 'src/app/states/products.state';
 
 @Component({
@@ -10,7 +10,7 @@ import { ActionEvent, ProductActionsTypes } from 'src/app/states/products.state'
 })
 export class ProductsNavBarComponent implements OnInit {
  
- @Output() productEventEmitter : EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>() ;
+ //@Output() productEventEmitter : EventEmitter<ActionEvent> = new EventEmitter<ActionEvent>() ;
   constructor(private store :Store<any> ) { }
 
   ngOnInit(): void {
@@ -25,16 +25,18 @@ export class ProductsNavBarComponent implements OnInit {
 }
   
   onGetAvailableProducts(){
-	this.productEventEmitter.emit({type:ProductActionsTypes.GET_AVAILABLE_PRODUCTS});
+	//this.productEventEmitter.emit({type:ProductActionsTypes.GET_AVAILABLE_PRODUCTS});
 }
   
   onNewProduct(){
-		this.productEventEmitter.emit({type:ProductActionsTypes.NEW_PRODUCT});
+		//this.productEventEmitter.emit({type:ProductActionsTypes.NEW_PRODUCT});
+		//this.store.dispatch(new NewProductsAction({}));
 
 }
   
   onSearch(dataForm :any){
-	this.productEventEmitter.emit({type:ProductActionsTypes.SEARCH_PRODUCTS,payload:dataForm});
+	//this.productEventEmitter.emit({type:ProductActionsTypes.SEARCH_PRODUCTS,payload:dataForm});
+	this.store.dispatch(new SearchProductsAction(dataForm.keyword));
 	
 }
 

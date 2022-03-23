@@ -4,12 +4,12 @@
 		    LOADING...
 		  </ng-container>
 	
-		  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+		  <ng-container *ngSwitchCase="DataStateEnum.LOADER">
 			      <table class="table">
 				     <tr><th>ID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Selected</th><th>Available</th></tr>
 				     <app-product-item [product]="p" 
-				        *ngFor="let p of result.data"
-				        (eventEmitter)="onAction($event)" style="display: contents;">
+				        *ngFor="let p of result.products"
+				        style="display: contents;">
 				     </app-product-item>
 				     
 				    <!-- <tr *ngFor="let p of result.data">

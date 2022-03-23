@@ -1,5 +1,7 @@
 import { Component,   EventEmitter,  Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/model/product.model';
+import { DeleteProductsAction, SelectProductsAction } from 'src/app/ngRX/product.action';
 import { ActionEvent, ProductActionsTypes } from 'src/app/states/products.state';
 
 @Component({
@@ -9,31 +11,33 @@ import { ActionEvent, ProductActionsTypes } from 'src/app/states/products.state'
 })
 export class ProductItemComponent implements OnInit {
   @Input() product : Product | null=null;
-  @Output() eventEmitter: EventEmitter<ActionEvent> =new EventEmitter<ActionEvent>()
+//  @Output() eventEmitter: EventEmitter<ActionEvent> =new EventEmitter<ActionEvent>()
   
-  constructor() { }
+  constructor( private store:Store) { }
 
   ngOnInit(): void {
   }
   
     onSelect(p:Product){
-	this.eventEmitter.emit(
+	 this.store.dispatch(new SelectProductsAction(p))
+	/*this.eventEmitter.emit(
 		{type:ProductActionsTypes.SELECT_PRODUCT,
 		 payload:p
-		})
+		})*/
 }
   onDelete(p:Product){
-	this.eventEmitter.emit(
+	this.store.dispatch(new DeleteProductsAction(p))
+	/*this.eventEmitter.emit(
 		{type:ProductActionsTypes.DELETE_PRODUCT,
 		payload:p
-		})
+		})*/
 }
 
  onEdit(p:Product){
-	this.eventEmitter.emit(
+	/*this.eventEmitter.emit(
 		{type:ProductActionsTypes.EDIT_PRODUCT,
 		 payload:p
-		})
+		})*/
 	
 }
 

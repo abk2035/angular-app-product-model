@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/model/product.model';
+import { ProductsState, ProductStateEnum } from 'src/app/ngRX/product.reduxer';
 import { ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes } from 'src/app/states/products.state';
 
 @Component({
@@ -9,9 +10,9 @@ import { ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes } from 's
   styleUrls: ['./products-list.component.scss']
 })
 export class ProductsListComponent implements OnInit {
-  @Input() productsInput$:Observable<AppDataState<Product[]>>|null=null;
-  @Output() productEventEmitter : EventEmitter<ActionEvent>=new EventEmitter<ActionEvent>();
-  readonly DataStateEnum=DataStateEnum;
+  @Input() productsInput$:Observable<ProductsState>|null=null;
+ // @Output() productEventEmitter : EventEmitter<ActionEvent>=new EventEmitter<ActionEvent>();
+  readonly DataStateEnum=ProductStateEnum;
   
   constructor() { }
 
@@ -22,8 +23,8 @@ export class ProductsListComponent implements OnInit {
 	
 
 
-onAction($event:ActionEvent){
+/*onAction($event:ActionEvent){
 	this.productEventEmitter.emit($event);
-}
+}*/
 
 }
