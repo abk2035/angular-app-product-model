@@ -60,7 +60,7 @@ export class ProductAddComponent implements OnInit {
 	});*/
 }
 
-onNewProduct(){
+newProduct(){
 	this.store.dispatch(new NewProductsAction({}));
 }
 

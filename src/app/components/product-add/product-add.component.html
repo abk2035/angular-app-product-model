@@ -1,13 +1,17 @@
 <div class="container mt-4" *ngIf="productFormGroup" >
   {{productFormGroup.controls["name"].errors|json}}
+  
    <ng-container *ngIf="state as data">
+       <ng-container *ngIf="data.dataState==ProductsStateEnum.LOADING">
+         {{state.errorMessage}}
+       </ng-container>
        <ng-container *ngIf="data.dataState==ProductsStateEnum.LOADING">
          Loading...
        </ng-container>
        <ng-container *ngIf="data.dataState==ProductsStateEnum.LOADER">
             <div class="alert-success container p-3 m-3">
               <span> Product save successfully </span>
-               <button class="btn btn-success" (click)="onNewProduct()">New Product</button>
+               <button class="btn btn-success" (click)="newProduct()">New Product</button>
             </div>
         </ng-container>
         <ng-container *ngIf="data.dataState==ProductsStateEnum.NEW">

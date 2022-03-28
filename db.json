@@ -63,6 +63,22 @@
       "quantity": "25",
       "selected": true,
       "available": false
+    },
+    {
+      "id": 9,
+      "name": "pc gamer",
+      "price": "4000",
+      "quantity": "20",
+      "selected": true,
+      "available": false
+    },
+    {
+      "id": 10,
+      "name": "tshirt-LVM",
+      "price": "1500",
+      "quantity": "12",
+      "selected": false,
+      "available": true
     }
   ]
 }

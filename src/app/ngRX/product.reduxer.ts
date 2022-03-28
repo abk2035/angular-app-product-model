@@ -7,20 +7,25 @@ export enum ProductStateEnum{
 	LOADER = "Loader",
 	ERROR="Error",
 	INITIAL="Initial",
-	NEW = "New"
+	NEW = "New",
+	EDIT= "EDIT",
+	UPDATED="Updated"
 }
 
 export interface ProductsState {
 	products : Product[],
 	errorMessage :string,
-	dataState : ProductStateEnum 
-	
+	dataState : ProductStateEnum ,
+	currentProduct: Product|null,
+	currentAction:ProductsAction |null
 }
 
 const initState ={
 	products : [],
 	errorMessage : "",
-	dataState : ProductStateEnum.INITIAL
+	dataState : ProductStateEnum.INITIAL,
+	currentProduct: null,
+	currentAction:null
 }
 
 export function productsReducer(state:ProductsState = initState, action:Action) : ProductsState{
@@ -80,6 +85,7 @@ export function productsReducer(state:ProductsState = initState, action:Action) 
 		   case ProductsActionsTypes.NEW_PRODUCTS_ERROR:
 		      return {...state,dataState:ProductStateEnum.ERROR,errorMessage:(<ProductsAction> action).payload}
 		      
+		      // save product
 		    case ProductsActionsTypes.SAVE_PRODUCTS:
 		      return {...state,dataState:ProductStateEnum.LOADING};
 		    case ProductsActionsTypes.SAVE_PRODUCTS_SUCCESS:
@@ -88,7 +94,25 @@ export function productsReducer(state:ProductsState = initState, action:Action) 
 		      return {...state,dataState:ProductStateEnum.LOADER,products:prods};
 		    case ProductsActionsTypes.DELETE_PRODUCTS_ERROR:
 		      return {...state,dataState:ProductStateEnum.ERROR,errorMessage:(<ProductsAction> action).payload}
-		  default : return {...state}
+		      
+		      // edit product
+		         case ProductsActionsTypes.EDIT_PRODUCTS:
+		            return {...state,dataState:ProductStateEnum.LOADING};
+		         case ProductsActionsTypes.EDIT_PRODUCTS_SUCCESS:
+		            return {...state,dataState:ProductStateEnum.LOADER,currentProduct:(<ProductsAction> action).payload};
+		         case ProductsActionsTypes.DELETE_PRODUCTS_ERROR:
+		            return {...state,dataState:ProductStateEnum.ERROR,errorMessage:(<ProductsAction> action).payload};
+		      
+		         // update product
+		         case ProductsActionsTypes.UPDATE_PRODUCTS:
+		              return {...state,dataState:ProductStateEnum.LOADING};
+		         case ProductsActionsTypes.UPDATE_PRODUCTS_SUCCESS:
+		              let updateProduct :Product = (<ProductsAction> action).payload ;
+		              let productList=state.products.map(p=>(p.id==updateProduct.id )? updateProduct:p)
+		              return {...state,dataState:ProductStateEnum.UPDATED,products:productList};
+		         case ProductsActionsTypes.UPDATE_PRODUCTS_ERROR:
+		              return {...state,dataState:ProductStateEnum.ERROR,errorMessage:(<ProductsAction> action).payload};
+		     default : return {...state}
 	}
 	
 }

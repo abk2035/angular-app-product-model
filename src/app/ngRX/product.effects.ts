@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { catchError, map, mergeMap, Observable, of } from "rxjs";
 import { ProductsService } from "../services/products.service";
-import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, ProductsActionsTypes,ProductsAction, SelectProductsActionSuccess, SelectProductsActionError, DeleteProductsActionSuccess, DeleteProductsActionError, NewProductsAction, SaveProductsActionSuccess, SaveProductsActionError } from "./product.action";
+import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, ProductsActionsTypes,ProductsAction, SelectProductsActionSuccess, SelectProductsActionError, DeleteProductsActionSuccess, DeleteProductsActionError, NewProductsAction, SaveProductsActionSuccess, SaveProductsActionError, NewProductsActionSuccess, EditProductsActionSuccess, EditProductsActionError, UpdateProductsActionSuccess, UpdateProductsActionError } from "./product.action";
 
 
 @Injectable()
@@ -101,7 +101,7 @@ import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProd
 	    ()=>this.effectActions.pipe(
 		     ofType(ProductsActionsTypes.NEW_PRODUCTS),
 		     map(()=>{
-			  return  new NewProductsAction({});
+			  return  new NewProductsActionSuccess({});
 			     })
 		           )
 	);
@@ -116,6 +116,36 @@ import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProd
 			            .pipe(
 				              map((product)=> new SaveProductsActionSuccess(product)),
 				              catchError((err)=>of(new SaveProductsActionError(err.message)))
+			                       )
+		                      })
+		           )	   	
+	);
+	
+	   //  edit Products effect
+	  EditProductsEffect:Observable<ProductsAction> = createEffect(
+	
+	    ()=>this.effectActions.pipe(
+		     ofType(ProductsActionsTypes.EDIT_PRODUCTS),
+		     mergeMap((action : ProductsAction)=>{
+			  return this.productsService.getProduct(action.payload)
+			            .pipe(
+				              map((product)=> new EditProductsActionSuccess(product)),
+				              catchError((err)=>of(new EditProductsActionError(err.message)))
+			                       )
+		                      })
+		           )	   	
+	);
+	
+		   //  edit Products effect
+	  UpdateProductsEffect:Observable<ProductsAction> = createEffect(
+	
+	    ()=>this.effectActions.pipe(
+		     ofType(ProductsActionsTypes.UPDATE_PRODUCTS),
+		     mergeMap((action : ProductsAction)=>{
+			  return this.productsService.updateProduct(action.payload)
+			            .pipe(
+				              map((product)=> new UpdateProductsActionSuccess(product)),
+				              catchError((err)=>of(new UpdateProductsActionError(err.message)))
 			                       )
 		                      })
 		           )	   	

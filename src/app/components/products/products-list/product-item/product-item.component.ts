@@ -1,7 +1,8 @@
 import { Component,   EventEmitter,  Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Product } from 'src/app/model/product.model';
-import { DeleteProductsAction, SelectProductsAction } from 'src/app/ngRX/product.action';
+import { DeleteProductsAction, EditProductsAction, SelectProductsAction } from 'src/app/ngRX/product.action';
 import { ActionEvent, ProductActionsTypes } from 'src/app/states/products.state';
 
 @Component({
@@ -13,7 +14,7 @@ export class ProductItemComponent implements OnInit {
   @Input() product : Product | null=null;
 //  @Output() eventEmitter: EventEmitter<ActionEvent> =new EventEmitter<ActionEvent>()
   
-  constructor( private store:Store) { }
+  constructor( private store:Store,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -38,6 +39,7 @@ export class ProductItemComponent implements OnInit {
 		{type:ProductActionsTypes.EDIT_PRODUCT,
 		 payload:p
 		})*/
+  this.router.navigateByUrl("/editProduct/"+p.id);
 	
 }
 
